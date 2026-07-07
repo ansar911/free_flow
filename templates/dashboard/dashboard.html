@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Dashboard
+
+</h2>
+
+<div class="row">
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<div class="card card-stat">
+
+<div class="card-body">
+
+<h6>Total Students</h6>
+
+<h1>{{total_students}}</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<div class="card card-stat">
+
+<div class="card-body">
+
+<h6>Total Parents</h6>
+
+<h1>{{total_parents}}</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<div class="card card-stat">
+
+<div class="card-body">
+
+<h6>Pending Payments</h6>
+
+<h1>{{pending_payments}}</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<div class="card card-stat">
+
+<div class="card-body">
+
+<h6>Collected</h6>
+
+<h1>₹{{collected}}</h1>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
