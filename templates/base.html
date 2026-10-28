@@ -30,7 +30,8 @@ FeeFlow
 
 </div>
 
-<a  href="/">
+<a class="{% if request.path == '/' %}active{% endif %}"
+href="/">
 
 <i class="bi bi-speedometer2"></i>
 
@@ -38,7 +39,8 @@ Dashboard
 
 </a>
 
-<a href="{% url 'student_list' %}">
+<a class="{% if '/students/' in request.path %}active{% endif %}"
+href="{% url 'student_list' %}">
 
 <i class="bi bi-people"></i>
 
@@ -46,7 +48,8 @@ Students
 
 </a>
 
-<a href="{% url 'parent_list' %}">
+<a class="{% if '/parents/' in request.path %}active{% endif %}"
+href="{% url 'parent_list' %}">
 
 <i class="bi bi-person-lines-fill"></i>
 
@@ -54,7 +57,8 @@ Parents
 
 </a>
 
-<a href="#">
+<a class="{% if request.path == '/payments/' %}active{% endif %}"
+href="{% url 'invoice_list' %}">
 
 <i class="bi bi-wallet2"></i>
 
@@ -62,15 +66,40 @@ Payments
 
 </a>
 
-<a href="#">
+<a class="{% if '/payments/pending/' in request.path %}active{% endif %}"
+href="{% url 'pending_payments' %}">
 
-<i class="bi bi-bar-chart"></i>
+<i class="bi bi-check-circle"></i>
 
-Reports
+Verify Payments
 
 </a>
 
-<a href="#">
+<a class="{% if '/billing/' in request.path %}active{% endif %}"
+href="{% url 'billing_dashboard' %}">
+
+<i class="bi bi-receipt"></i>
+
+Billing
+</a>
+
+
+<a href="{% url 'report_dashboard' %}">
+    <i class="bi bi-bar-chart"></i>
+    Reports
+</a>
+
+<a class="{% if '/whatsapp/' in request.path %}active{% endif %}"
+href="{% url 'whatsapp_dashboard' %}">
+
+<i class="bi bi-whatsapp"></i>
+
+WhatsApp
+
+</a>
+
+<a class="{% if '/settings/' in request.path %}active{% endif %}"
+href="{% url 'settings' %}">
 
 <i class="bi bi-gear"></i>
 

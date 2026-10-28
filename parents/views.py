@@ -4,6 +4,8 @@ from django.db.models import Q
 
 from .models import Parent
 from .forms import ParentForm
+from logs.services.logger import Logger
+from django.contrib import messages
 
 
 @login_required
@@ -39,7 +41,13 @@ def add_parent(request):
         form = ParentForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            parent = form.save()
+
+            Logger.log(
+                request.user,
+                "ADD_PARENT",
+                f"Added parent {parent.name} ({parent.phone})",
+            )
             return redirect("parent_list")
 
     else:
@@ -64,7 +72,13 @@ def edit_parent(request, pk):
         form = ParentForm(request.POST, instance=parent)
 
         if form.is_valid():
-            form.save()
+            parent = form.save()
+
+            Logger.log(
+                request.user,
+                "EDIT_PARENT",
+                f"Edited parent {parent.name} ({parent.phone})",
+            )
             return redirect("parent_list")
 
     else:

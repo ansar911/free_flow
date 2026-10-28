@@ -1,26 +1,35 @@
 from django.contrib import admin
-from .models import Payment
 
-@admin.register(Payment)
-class PaymentAdmin(admin.ModelAdmin):
+from .models import PaymentTransaction, PaymentAllocation
+
+
+@admin.register(PaymentTransaction)
+class PaymentTransactionAdmin(admin.ModelAdmin):
+
     list_display = (
-        "student",
-        "month",
-        "year",
+        "invoice",
         "amount",
-        "status",
         "payment_method",
-        "paid_date",
+        "status",
+        "payment_date",
     )
 
     list_filter = (
         "status",
         "payment_method",
-        "month",
-        "year",
     )
 
     search_fields = (
-        "student__name",
-        "student__student_id",
+        "transaction_id",
+        "invoice__parent__name",
+    )
+
+
+@admin.register(PaymentAllocation)
+class PaymentAllocationAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "transaction",
+        "invoice_item",
+        "amount",
     )

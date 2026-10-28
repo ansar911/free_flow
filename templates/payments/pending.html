@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Pending Payments
+
+</h2>
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>Parent</th>
+
+<th>Amount</th>
+
+<th>Method</th>
+
+<th>Screenshot</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for payment in payments %}
+
+<tr>
+
+<td>
+
+{{ payment.invoice.parent.name }}
+
+</td>
+
+<td>
+
+₹{{ payment.amount }}
+
+</td>
+
+<td>
+
+{{ payment.payment_method }}
+
+</td>
+
+<td>
+
+{% if payment.screenshot %}
+
+<a
+target="_blank"
+href="{{ payment.screenshot.url }}">
+
+View Screenshot
+
+</a>
+
+{% else %}
+
+—
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a
+class="btn btn-success btn-sm"
+href="{% url 'verify_payment' payment.id %}">
+
+Approve
+
+</a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5">
+
+No Pending Payments
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

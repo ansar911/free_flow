@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Invoices</h2>
+
+<form method="get" class="mb-3">
+
+<div class="input-group">
+
+<input
+type="text"
+name="search"
+class="form-control"
+placeholder="Search Student ID, Student Name, Parent or Phone"
+value="{{ search }}">
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+
+            <th>Parent</th>
+            <th>Billing Cycle</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Status</th>
+            <th></th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for invoice in invoices %}
+
+        <tr>
+
+            <td>{{ invoice.parent.name }}</td>
+
+            <td>{{ invoice.billing_cycle.name }}</td>
+
+            <td>₹{{ invoice.total_amount }}</td>
+
+            <td>₹{{ invoice.paid_amount }}</td>
+
+            <td>
+
+            {% if invoice.status == "PAID" %}
+
+            <span class="badge bg-success">
+
+            Paid
+
+            </span>
+
+            {% elif invoice.status == "PARTIAL" %}
+
+            <span class="badge bg-warning text-dark">
+
+            Partial
+
+            </span>
+
+            {% else %}
+
+            <span class="badge bg-danger">
+
+            Pending
+
+            </span>
+
+            {% endif %}
+
+            </td>
+
+            <td>
+
+                <a
+                    href="{% url 'receive_payment' invoice.id %}"
+                    class="btn btn-success btn-sm">
+
+                    Receive Payment
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% empty %}
+
+        <tr>
+
+            <td colspan="6">
+
+                No invoices found.
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

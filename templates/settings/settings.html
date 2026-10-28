@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Academy Settings
+</h2>
+
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <!-- Academy Information -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <strong>Academy Information</strong>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Academy Name</label>
+                    {{ form.academy_name }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Academy Phone</label>
+                    {{ form.academy_phone }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Academy Email</label>
+                    {{ form.academy_email }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Address</label>
+                    {{ form.address }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Billing -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <strong>Billing Settings</strong>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Monthly Fee</label>
+                    {{ form.monthly_fee }}
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Late Fee</label>
+                    {{ form.late_fee }}
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Reminder Day</label>
+                    {{ form.reminder_day }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Payment -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <strong>Payment Settings</strong>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">UPI ID</label>
+                    {{ form.upi_id }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Google Pay Number</label>
+                    {{ form.gpay_number }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">WhatsApp Number</label>
+                    {{ form.whatsapp_number }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">QR Code</label>
+                    {{ form.qr_code }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- WhatsApp -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <strong>
+                WhatsApp Cloud API
+            </strong>
+
+            {% if whatsapp_ready %}
+
+                <span class="badge bg-success">
+                    Connected
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-danger">
+                    Not Configured
+                </span>
+
+            {% endif %}
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Provider</label>
+                    {{ form.whatsapp_provider }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        Enable WhatsApp
+                    </label>
+                    <br>
+                    {{ form.whatsapp_enabled }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        Business Number
+                    </label>
+                    {{ form.whatsapp_number }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        Phone Number ID
+                    </label>
+                    {{ form.whatsapp_phone_number_id }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        Business Account ID
+                    </label>
+                    {{ form.whatsapp_business_account_id }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        API Version
+                    </label>
+                    {{ form.whatsapp_api_version }}
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">
+                        Access Token
+                    </label>
+                    {{ form.whatsapp_access_token }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        Template Name
+                    </label>
+                    {{ form.whatsapp_template_name }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <button
+                type="submit"
+                class="btn btn-success">
+
+                Save Settings
+
+            </button>
+
+            {% if whatsapp_ready %}
+
+                <a
+                    href="{% url 'whatsapp_test' %}"
+                    class="btn btn-primary ms-2">
+
+                    Test Connection
+
+                </a>
+
+            {% else %}
+
+                <button
+                    class="btn btn-secondary ms-2"
+                    disabled>
+
+                    Configure WhatsApp First
+
+                </button>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</form>
+
+
+<!-- Developer Tools -->
+{% comment %}
+<div class="card border-danger mt-5">
+
+    <div class="card-header bg-danger text-white">
+
+        <strong>Developer Tools</strong>
+
+    </div>
+
+    <div class="card-body">
+
+        <h5>Reset Demo Data</h5>
+
+        <p>
+
+            Deletes all demo students, parents,
+            invoices, payments and WhatsApp queue.
+
+            Settings and the administrator account are preserved.
+
+        </p>
+
+        <form
+            method="post"
+            action="{% url 'reset_demo' %}">
+
+            {% csrf_token %}
+
+            <button
+                class="btn btn-danger"
+                onclick="return confirm('Delete all demo data?')">
+
+                Reset Demo Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+{% endcomment %}
+
+{% endblock %}

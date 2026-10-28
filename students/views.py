@@ -8,6 +8,8 @@ from .forms import StudentForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from logs.services.logger import Logger
+from django.contrib import messages
 
 @login_required
 def student_list(request):
@@ -79,7 +81,18 @@ def add_student(request):
 
         if form.is_valid():
 
-            form.save()
+            student = form.save()
+
+            Logger.log(
+                    request.user,
+                    "ADD_STUDENT",
+                    f"Added student {student.student_id} - {student.name}",
+                )
+
+            messages.success(
+                    request,
+                    "Student added successfully."
+                )
 
             return redirect("student_list")
 
@@ -104,7 +117,18 @@ def edit_student(request, pk):
         form = StudentForm(request.POST, instance=student)
 
         if form.is_valid():
-            form.save()
+            student = form.save()
+
+            Logger.log(
+                request.user,
+                "EDIT_STUDENT",
+                f"Edited student {student.student_id} - {student.name}",
+            )
+
+            messages.success(
+                request,
+                "Student updated successfully."
+            )
             return redirect("student_list")
 
     else:

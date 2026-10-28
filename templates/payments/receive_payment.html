@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+Receive Payment
+</h2>
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h4>{{ invoice.parent.name }}</h4>
+
+<p>
+Billing Cycle:
+<strong>{{ invoice.billing_cycle.name }}</strong>
+</p>
+
+<hr>
+
+<div class="row mb-3">
+
+<div class="col-md-4">
+
+<strong>Total</strong><br>
+
+₹{{ invoice.total_amount }}
+
+</div>
+
+<div class="col-md-4">
+
+<strong>Paid</strong><br>
+
+₹{{ invoice.paid_amount }}
+
+</div>
+
+<div class="col-md-4">
+
+<strong>Balance</strong><br>
+
+₹{{ balance }}
+
+</div>
+
+</div>
+
+<form
+method="post"
+enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button
+class="btn btn-success">
+
+Save Payment
+
+</button>
+
+<a
+href="{% url 'invoice_list' %}"
+class="btn btn-secondary">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

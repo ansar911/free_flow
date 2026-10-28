@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+Billing Dashboard
+</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button
+        class="btn btn-primary"
+        name="action"
+        value="preview">
+
+        Preview Billing
+
+    </button>
+
+    <button
+        class="btn btn-success"
+        name="action"
+        value="generate">
+
+        Generate Billing
+
+    </button>
+
+</form>
+
+{% if preview %}
+
+<hr>
+
+<div class="card mt-4">
+
+<div class="card-header">
+
+Billing Preview
+
+</div>
+
+<div class="card-body">
+
+<table class="table">
+
+<tr>
+<td>Month</td>
+<td>{{ preview.month }}/{{ preview.year }}</td>
+</tr>
+
+<tr>
+<td>Students</td>
+<td>{{ preview.students }}</td>
+</tr>
+
+<tr>
+<td>Parents</td>
+<td>{{ preview.parents }}</td>
+</tr>
+
+<tr>
+<td>Fee</td>
+<td>₹{{ preview.fee }}</td>
+</tr>
+
+<tr>
+<td><strong>Expected Income</strong></td>
+<td><strong>₹{{ preview.expected_income }}</strong></td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% if result %}
+
+<hr>
+
+<div class="alert alert-success">
+
+<h4>
+
+Billing Generated Successfully
+
+</h4>
+
+<hr>
+
+<p>
+
+Billing Cycle:
+
+<strong>{{ result.billing_cycle }}</strong>
+
+</p>
+
+<p>
+
+Invoices Created:
+
+<strong>{{ result.invoice_count }}</strong>
+
+</p>
+
+<p>
+
+Students:
+
+<strong>{{ result.student_count }}</strong>
+
+</p>
+
+<p>
+
+Expected Collection:
+
+<strong>₹{{ result.expected_income }}</strong>
+
+</p>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

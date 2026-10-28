@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Reports
+
+</h2>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Total Students</h5>
+
+<h2>{{ total_students }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Paid Invoices</h5>
+
+<h2>{{ paid }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Partial</h5>
+
+<h2>{{ partial }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mt-3">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Pending</h5>
+
+<h2>{{ pending }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mt-3">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Collected</h5>
+
+<h2>₹{{ collected }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mt-3">
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5>Expected</h5>
+
+<h2>₹{{ expected }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

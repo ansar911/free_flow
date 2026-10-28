@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'dashboard',
     'settings_app',
     'billing',
+    "reports",
+    "whatsapp",
+    "logs",
+    "user_management",
+    "scheduler",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +64,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'feeflow.urls'
 
-from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,3 +142,7 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard"
 
 LOGOUT_REDIRECT_URL = "login"
+
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = BASE_DIR / "media"
